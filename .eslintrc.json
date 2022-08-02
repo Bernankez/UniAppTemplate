@@ -1,0 +1,15 @@
+{
+  "root": true,
+  "extends": ["plugin:vue/vue3-essential", "eslint:recommended", "@vue/eslint-config-typescript/recommended", "@vue/eslint-config-prettier"],
+  "env": {
+    "vue/setup-compiler-macros": true
+  },
+  "rules": {
+    "vue/no-v-text-v-html-on-component": "warn",
+    "no-undef": "warn",
+    "prefer-const": "warn",
+    "@typescript-eslint/no-empty-function": "warn",
+    "no-async-promise-executor": "warn",
+    "vue/multi-word-component-names": "warn"
+  }
+}

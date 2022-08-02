@@ -1,0 +1,62 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
+      "LEchart": "@/plugins/lime-echart/components/l-echart/l-echart.vue"
+    }
+  },
+  "pages": [
+    // pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/home/index",
+      "style": {
+        "navigationBarTitleText": "首页"
+      }
+    },
+    {
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarTitleText": "uni-app"
+      }
+    }
+  ],
+  "subPackages": [
+    {
+      "root": "subpackages/example/",
+      "name": "example",
+      "pages": [
+        {
+          "path": "index",
+          "style": {
+            "navigationBarTitleText": "分包示例"
+          }
+        }
+      ]
+    }
+  ],
+  "condition": {
+    // 启动模式配置，仅开发期间生效，用于模拟直达页面的场景，如：小程序转发后，用户点击所打开的页面
+    "current": 0, // 当前使用模式index
+    "list": [
+      {
+        "name": "login", // 模式名称
+        "path": "pages/login/index", // 启动页面
+        "query": "testInfo=something&auto=false" // 启动参数，在onLoad里得到
+      }
+    ]
+  },
+  "preloadRule": {
+    // 预加载分包
+    "pages/login/index": {
+      "packages": ["example"],
+      "network": "wifi"
+    }
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "template",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  }
+}
