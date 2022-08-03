@@ -2,7 +2,7 @@
 import { defineConfig, loadEnv } from "vite";
 import uni from "@dcloudio/vite-plugin-uni";
 import Unocss from "unocss/vite";
-import transformWxClass from "unplugin-transform-wx-class/vite";
+import transformWeClass from "unplugin-transform-we-class/vite";
 import { viteMockServe } from "vite-plugin-mock";
 import { resolve } from "path";
 
@@ -30,7 +30,7 @@ export default defineConfig(({ mode, command }) => {
         },
       }),
       Unocss(),
-      transformWxClass(),
+      transformWeClass(),
       viteMockServe({
         mockPath: "src/mock",
         localEnabled: command === "serve" && env.VITE_APP_MOCK === "enable",
