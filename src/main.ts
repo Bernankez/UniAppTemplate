@@ -1,12 +1,15 @@
-import { createSSRApp } from "vue";
-import { createPinia } from "pinia";
-import App from "./App.vue";
-import "uno.css"
+import { createSSRApp } from 'vue'
+import { createPinia } from 'pinia'
+import piniaPersist from 'pinia-plugin-persist-uni'
+import App from './App.vue'
+import 'uno.css'
+
 export function createApp() {
-  const app = createSSRApp(App);
-  const pinia = createPinia();
-  app.use(pinia);
+  const app = createSSRApp(App)
+  const pinia = createPinia()
+  pinia.use(piniaPersist)
+  app.use(pinia)
   return {
     app,
-  };
+  }
 }
