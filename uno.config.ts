@@ -27,7 +27,7 @@ export const directionMap: Record<string, string[]> = {
 
 function directionSize(size?: string) {
   if (!size) {
-    return '0'
+    return '0rem'
   }
   const _size = Number(size)
   if (Number.isNaN(_size)) {
@@ -54,8 +54,8 @@ export default defineConfig({
   rules: [
     ['top-safe', { top: 'var(--window-top)' }],
     ['bottom-safe', { bottom: 'env(safe-area-inset-bottom)' }],
-    [/^p-?([rltb])-safe-max(?:-?(.+))?$/, ([, direction, s]) => ({ [`padding${directionMap[direction]}`]: `max(env(safe-area-inset${directionMap[direction]}), ${directionSize(s)})` })], // pb-safe-max-10 pb-safe-max-10rpx p-b-safe-max
-    [/^m-?([rltb])-safe-max(?:-?(.+))?$/, ([, direction, s]) => ({ [`margin${directionMap[direction]}`]: `max(env(safe-area-inset${directionMap[direction]}), ${directionSize(s)})` })], // mb-safe-max-10 mb-safe-max-10rpx m-b-safe-max
+    [/^p-?([rltb])-max-safe(?:-?(.+))?$/, ([, direction, s]) => ({ [`padding${directionMap[direction]}`]: `max(env(safe-area-inset${directionMap[direction]}), ${directionSize(s)})` })], // pb-max-safe-10 pb-max-safe-10rpx p-b-max-safe
+    [/^m-?([rltb])-max-safe(?:-?(.+))?$/, ([, direction, s]) => ({ [`margin${directionMap[direction]}`]: `max(env(safe-area-inset${directionMap[direction]}), ${directionSize(s)})` })], // mb-max-safe-10 mb-max-safe-10rpx m-b-max-safe
     [/^p-?([rltb])-safe(?:-?(.+))?$/, ([, direction, s]) => ({ [`padding${directionMap[direction]}`]: `calc(env(safe-area-inset${directionMap[direction]}) + ${directionSize(s)})` })], // pb-safe-10 pb-safe-10rpx p-b-safe
     [/^m-?([rltb])-safe(?:-?(.+))?$/, ([, direction, s]) => ({ [`margin${directionMap[direction]}`]: `calc(env(safe-area-inset${directionMap[direction]}) + ${directionSize(s)})` })], // mb-safe-10 mb-safe-10rpx m-b-safe
   ],
