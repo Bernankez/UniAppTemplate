@@ -23,6 +23,9 @@ export function usePagination<T>(request: UsePaginationRequest<T>, options?: Use
   const data = shallowRef<T[]>([])
 
   async function _handleRequest(_page: number, _size: number) {
+    if (isDone.value) {
+      return
+    }
     const { data: returnedData, page: returnedPage } = await request(_page, _size)
     data.value.push(...returnedData)
     if (returnedData.length < _size) {
@@ -38,6 +41,7 @@ export function usePagination<T>(request: UsePaginationRequest<T>, options?: Use
   async function refresh() {
     page.value = startPage
     size.value = defaultSize
+    isDone.value = false
     await _handleRequest(page.value, size.value)
     return data.value
   }
@@ -52,6 +56,7 @@ export function usePagination<T>(request: UsePaginationRequest<T>, options?: Use
     page,
     size,
     data,
+    isDone,
     refresh,
     next,
   }
