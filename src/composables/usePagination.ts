@@ -27,7 +27,7 @@ export function usePagination<T>(request: UsePaginationRequest<T>, options?: Use
       return
     }
     const { data: returnedData, page: returnedPage } = await request(_page, _size)
-    data.value.push(...returnedData)
+    data.value = [...data.value, ...returnedData]
     if (returnedData.length < _size) {
       isDone.value = true
       return returnedData
@@ -39,6 +39,7 @@ export function usePagination<T>(request: UsePaginationRequest<T>, options?: Use
   }
 
   async function refresh() {
+    data.value = []
     page.value = startPage
     size.value = defaultSize
     isDone.value = false
