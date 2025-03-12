@@ -29,4 +29,9 @@ export class LoadingController {
       this.count = 0
     }
   }
+
+  hideAll() {
+    uni.hideLoading()
+    this.count = 0
+  }
 }
