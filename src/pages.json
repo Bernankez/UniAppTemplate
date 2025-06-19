@@ -31,5 +31,6 @@
     "navigationBarBackgroundColor": "@navBgColor",
     "navigationBarTextStyle": "@navTxtStyle"
   },
+  "__esModule": true,
   "subPackages": []
 }

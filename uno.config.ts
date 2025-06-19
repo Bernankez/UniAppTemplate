@@ -1,10 +1,10 @@
+import { presetUni } from '@uni-helper/unocss-preset-uni'
 import {
   defineConfig,
   presetIcons,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
-import { presetUni } from '@uni-helper/unocss-preset-uni'
 import uno from './src/styles/unocss'
 
 export const directionMap: Record<string, string[]> = {

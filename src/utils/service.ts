@@ -1,5 +1,5 @@
-import axios, { type AxiosError, type AxiosResponse } from 'axios'
 import { createUniAppAxiosAdapter } from '@uni-helper/axios-adapter'
+import axios, { type AxiosError, type AxiosResponse } from 'axios'
 
 const service = axios.create({
   adapter: createUniAppAxiosAdapter(),
