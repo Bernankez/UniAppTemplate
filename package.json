@@ -2,7 +2,7 @@
   "name": "uni-app-template",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@10.12.1",
+  "packageManager": "pnpm@10.12.2",
   "license": "MIT",
   "scripts": {
     "dev": "uni",
@@ -61,12 +61,12 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-4020420240722002",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4020420240722002",
     "@uni-helper/axios-adapter": "^1.5.2",
-    "@vueuse/core": "^13.3.0",
+    "@vueuse/core": "^13.4.0",
     "axios": "1.5",
     "pinia": "2.0.36",
     "pinia-plugin-persist-uni": "^1.3.1",
-    "vue": "~3.5.17",
-    "vue-i18n": "^11.1.6",
+    "vue": "~3.4.38",
+    "vue-i18n": "^11.1.7",
     "wot-design-uni": "^1.9.1"
   },
   "devDependencies": {
@@ -76,7 +76,7 @@
     "@dcloudio/uni-stacktracey": "3.0.0-4020420240722002",
     "@dcloudio/uni-vue-devtools": "3.0.0-4020420240722002",
     "@dcloudio/vite-plugin-uni": "3.0.0-4020420240722002",
-    "@iconify-json/carbon": "^1.2.9",
+    "@iconify-json/carbon": "^1.2.10",
     "@mini-types/alipay": "^3.0.14",
     "@types/node": "^20.19.1",
     "@uni-helper/eslint-config": "^0.4.0",
