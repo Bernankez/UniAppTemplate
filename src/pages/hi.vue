@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { value: name } = useQuery('name')
+const name = useRouteQuery('name')
 
 function back() {
   uni.navigateBack()
