@@ -31,7 +31,8 @@ function directionSize(size?: string) {
   }
   const _size = Number(size)
   if (Number.isNaN(_size)) {
-    return size
+    // eslint-disable-next-line regexp/no-useless-escape
+    return size.replaceAll(/[\[\]]/g, '').replaceAll('_', ' ')
   }
   return `${_size / 4}rem`
 }
