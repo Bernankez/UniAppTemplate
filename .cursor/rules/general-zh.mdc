@@ -1,0 +1,171 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+请**始终**牢记项目规范！
+
+# 项目技术规范
+
+## 技术栈
+
+- UniApp 3.0.0
+- TypeScript 5.8.3
+- Vue 3.4.38
+- Wot UI 1.9.1
+- UnoCSS 66.2.3
+- VueUse 13.4.0
+- Pinia 2.0.36
+
+## 项目结构
+
+```
+src/
+├── api/                  # 接口相关
+├── components/           # 全局组件
+│   └── ui/               # 纯UI组件
+├── composables/          # 全局composable
+├── layouts/              # 页面布局组件
+│   ├── default.vue       # 默认布局
+│   └── p0.vue            # padding为0的布局
+├── pages/                # 业务页面。该目录下的文件会被自动注册为路由。该目录下只能写页面，不能放组件或者composable
+├── static/               # 静态文件
+├── stores/               # 状态管理
+├── styles/               # 样式文件
+│   ├── theme.ts          # 全局主题文件
+│   └── variables.css     # 全局样式变量
+├── utils/                # 工具函数
+└── theme.json            # 微信小程序主题配置
+```
+
+## 组件开发规范
+
+### 文件结构（示例）
+
+```vue
+<script setup lang="ts">
+// 组件逻辑
+</script>
+
+<template>
+  <view class="flex justify-between items-center">
+    Hello World
+  </view>
+</template>
+
+<style scoped>
+/* 组件样式 */
+</style>
+
+<route lang="jsonc">
+{
+  "style": {
+    "navigationBarTitleText": "首页",  // 标题
+    "enablePullDownRefresh": true,  // 是否启用下拉刷新，可选
+    "onReachBottomDistance": 50,  // 距离页面底部多少距离触发onReachBottom，可选
+  }
+}
+</route>
+```
+
+### 双向绑定实现
+
+1. 优先支持受控和非受控模式
+
+2. 使用`useMergedState`管理状态
+
+3. 提供默认值prop
+
+```vue
+<script setup lang="ts">
+const props = defineProps<{
+  defaultValue?: boolean
+}>()
+
+const uncontrolled = ref(props.defaultValue)
+const controlled = defineModel<boolean | undefined>({
+  default: undefined,
+})
+
+const modelValue = useMergedState(controlled, uncontrolled)
+</script>
+```
+
+### Vue 3.4
+
+1. Vue 3.4中可以使用`defineModel`定义双向绑定
+
+2. Vue 3.4中可以使用prop简写
+
+  ```vue
+  <script setup lang="ts">
+  const value = ref(1)
+  </script>
+  
+  <template>
+    <MyComponent :value  />
+  </template>
+  ```
+
+## API调用规范
+
+```javascript
+export async function getData() {
+  const { data } = await service<boolean>({
+    url: "/api-endpoint",
+    method: "get"
+  })
+  return data
+}
+```
+
+## 最佳实践
+
+1. 异步处理：优先使用async/await
+
+2. 使用useMergedState管理状态
+
+3. 样式方案：
+
+    - 首选UnoCSS，尽量不抽离单独的class
+
+    - 如果涉及与js中的绑定，此时可使用单独的类
+
+    ```vue
+    <script setup lang="ts">
+    const props = defineProps<{
+      width: string | number
+    }>()
+
+    const width = computed(() => {
+      if (typeof props.width === 'number') {
+        return `${props.width}px`
+      }
+      return props.width
+    })
+    </script>
+
+    <style scoped>
+    .side-panel-content {
+      width: v-bind("width");
+    }
+    </style>
+    ```
+
+    - 复杂场景使用cva+twMerge
+
+4. 工具函数：优先使用VueUse提供的方案(如useEventListener)，其次是 `composables` 中提供的函数
+
+5. 优先使用函数声明而不是函数表达式
+
+## 问题解决流程
+
+1. 某项任务所需要具备的知识条件不在你的知识库中 → 查阅官方文档（这点很重要，务必不要胡编乱造）
+
+2. 用户指出你某处bug修改多次均无法实现效果 → 检查论坛/问答网站
+
+3. 用户提出的需求不明确 → 用最简短的话语了解用户需求
+
+---
+
+如果你完全理解以上所说，请在每个回复开头加上“🔥”

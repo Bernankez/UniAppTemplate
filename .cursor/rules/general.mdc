@@ -1,0 +1,174 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Please **always** keep the project specifications in mind!
+
+# Project Technical Specifications
+
+This project uses UniApp to develop H5 pages, which may need to be ported to WeChat Mini Programs in the future. Therefore, try to use Mini Program/H5 compatible writing methods during development.
+
+## Tech Stack
+
+- UniApp 3.0.0
+- TypeScript 5.8.3
+- Vue 3.4.38
+- Wot UI 1.9.1
+- UnoCSS 66.2.3
+- VueUse 13.4.0
+- Pinia 2.0.36
+
+## Project Structure
+
+```
+src/
+├── api/                  # API-related
+├── components/           # Global components
+│   └── ui/               # Pure UI components
+├── composables/          # Global composables
+├── layouts/              # Page layout components
+│   ├── default.vue       # Default layout
+│   └── p0.vue            # Padding-0 layout
+├── pages/                # Business pages. Files in this directory will be automatically registered as routes. Only pages should be placed here, not components or composables.
+├── static/               # Static files
+├── stores/               # State management
+├── styles/               # Style files
+│   ├── theme.ts          # Global theme file
+│   └── variables.css     # Global style variables
+├── utils/                # Utility functions
+└── theme.json            # WeChat Mini Program theme configuration
+```
+
+## Component Development Standards
+
+### File Structure (Example)
+
+```vue
+<script setup lang="ts">
+// Component logic
+</script>
+
+<template>
+  <view class="flex justify-between items-center">
+    Hello World
+  </view>
+</template>
+
+<style scoped>
+/* Component styles */
+</style>
+
+<route lang="jsonc">
+{
+  "style": {
+    "navigationBarTitleText": "Home",  // Title
+    "enablePullDownRefresh": true,  // Whether to enable pull-to-refresh (optional)
+    "onReachBottomDistance": 50,  // Distance from bottom to trigger onReachBottom (optional)
+  }
+}
+</route>
+```
+
+### Two-way Binding Implementation
+
+1. Prioritize supporting both controlled and uncontrolled modes
+
+2. Use `useMergedState` for state management
+
+3. Provide default value props
+
+```vue
+<script setup lang="ts">
+const props = defineProps<{
+  defaultValue?: boolean
+}>()
+
+const uncontrolled = ref(props.defaultValue)
+const controlled = defineModel<boolean | undefined>({
+  default: undefined,
+})
+
+const modelValue = useMergedState(controlled, uncontrolled)
+</script>
+```
+
+### Vue 3.4
+
+1. In Vue 3.4, you can use `defineModel` for two-way binding
+
+2. In Vue 3.4, you can use prop shorthand
+
+  ```vue
+  <script setup lang="ts">
+  const value = ref(1)
+  </script>
+  
+  <template>
+    <MyComponent :value  />
+  </template>
+  ```
+
+## API Call Standards
+
+```javascript
+export async function getData() {
+  const { data } = await service<boolean>({
+    url: "/api-endpoint",
+    method: "get"
+  })
+  return data
+}
+```
+
+## Best Practices
+
+1. Async handling: Prefer async/await
+
+2. Use `useMergedState` for state management
+
+3. Styling solutions:
+
+    - Prefer UnoCSS, avoid extracting separate classes when possible
+
+    - If binding with JS is involved, use separate classes
+
+    ```vue
+    <script setup lang="ts">
+    const props = defineProps<{
+      width: string | number
+    }>()
+
+    const width = computed(() => {
+      if (typeof props.width === 'number') {
+        return `${props.width}px`
+      }
+      return props.width
+    })
+    </script>
+
+    <style scoped>
+    .side-panel-content {
+      width: v-bind("width");
+    }
+    </style>
+    ```
+
+    - For complex scenarios, use cva+twMerge
+
+4. Utility functions: Prefer solutions provided by VueUse (e.g., useEventListener), then functions from `composables`
+
+5. Prefer function declarations over function expressions
+
+## Problem-Solving Process
+
+1. When knowledge required for a task is not in your knowledge base → Consult official documentation (This is very important, never make things up)
+
+2. When users point out bugs that persist after multiple fixes → Check forums/Q&A sites
+
+3. When user requirements are unclear → Use the most concise language to clarify user needs
+
+---
+
+If you fully understand the above, please begin each response with "🔥"
+
