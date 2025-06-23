@@ -1,0 +1,24 @@
+:root {
+  --foreground: #333333;
+  --background: #F8F8F8;
+  --card: #FFFFFF;
+  --card-foreground: #333333;
+  --primary: #1E6CE1;
+  --primary-foreground: #FFFFFF;
+  --base: #FAFAFA;
+  --base-foreground: #CCCCCC;
+  --accent: #0BBFC0;
+  --accent-foreground: #FFFFFF;
+  --muted: #CCCCCC;
+  --muted-foreground: #999999;
+  --success: #40BE7C;
+  --success-foreground: #FFFFFF;
+  --warning: #FF9933;
+  --warning-foreground: #FFFFFF;
+  --error: #F05358;
+  --error-foreground: #FFFFFF;
+  --info: #3966CE;
+  --info-foreground: #FFFFFF;
+  --border: #DCDFE6;
+  --divider: #EEEEEE;
+}
