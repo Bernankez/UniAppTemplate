@@ -7,7 +7,5 @@ export const useExampleStore = defineStore('example', () => {
     title,
   }
 }, {
-  persist: {
-    enabled: true,
-  },
+  persist: true,
 })

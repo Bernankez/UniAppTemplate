@@ -12,7 +12,6 @@
       "@mini-types/alipay",
       "miniprogram-api-typings",
       "@uni-helper/uni-types",
-      "pinia-plugin-persist-uni",
       "wot-design-uni/global"
     ],
     "sourceMap": true

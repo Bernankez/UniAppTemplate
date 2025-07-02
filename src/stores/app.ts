@@ -8,6 +8,6 @@ export const useAppStore = defineStore('app', () => {
   }
 }, {
   persist: {
-    enabled: true,
+    pick: ['token'],
   },
 })

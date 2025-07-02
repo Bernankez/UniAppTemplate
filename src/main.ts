@@ -1,5 +1,5 @@
 import { createPinia } from 'pinia'
-import piniaPersist from 'pinia-plugin-persist-uni'
+import { createPersistedState } from 'pinia-plugin-persistedstate'
 import { createSSRApp } from 'vue'
 import App from './App.vue'
 import 'uno.css'
@@ -8,7 +8,13 @@ import './styles/variables.css'
 export function createApp() {
   const app = createSSRApp(App)
   const pinia = createPinia()
-  pinia.use(piniaPersist)
+  const piniaPersistedstate = createPersistedState({
+    storage: {
+      getItem: uni.getStorageSync,
+      setItem: uni.setStorageSync,
+    },
+  })
+  pinia.use(piniaPersistedstate)
   app.use(pinia)
   return {
     app,
